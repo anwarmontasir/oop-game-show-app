@@ -15,8 +15,11 @@ class Game {
         /* hide start screen overlay */
         document.getElementById('overlay').style.display = 'none';
 
-        /* call getRandomPhrase, set activePhrase with chosen phrase, call addPhraseToDisplay */
-        const randomPhrase = this.getRandomPhrase();
+        /* call getRandomPhrase, set activePhrase with chosen phrase */
+        const activePhrase = new Phrase(this.getRandomPhrase());
+
+        /* call addPhraseToDisplay */
+        activePhrase.addPhraseToDisplay();
     }
 
     getRandomPhrase() {

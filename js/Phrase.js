@@ -5,7 +5,7 @@ class Phrase {
 
     addPhraseToDisplay() {
         /* add letter placeholders to the display when the game starts */
-        let htmlToDisplay = '<div id="phrase" class="section"><ul>';
+        let htmlToDisplay = '<ul>';
         
         const phraseArray = this.phrase.split('');
 
@@ -17,7 +17,9 @@ class Phrase {
             }
         });
 
-        htmlToDisplay += '</ul></div>';
+        htmlToDisplay += '</ul>';
+
+        document.getElementById('phrase').innerHTML = htmlToDisplay;
     }
 
     checkLetter() {
