@@ -1,20 +1,32 @@
 class Game {
     constructor(missed = 0, phrases, activePhrase = null) {
         this.missed = missed;
-        this.phrases = phrases;
+        this.phrases = [
+            'Phrase One',
+            'Phrase Two',
+            'Phrase Three',
+            'Phrase Four',
+            'Phrase Five'
+        ];
         this.activePhrase = activePhrase;
     }
 
     startGame() {
-        console.log('start game!');
-        /* hide start screen overlay, call getRandomPhrase, set activePhrase with chosen phrase, call addPhraseToDisplay */
+        /* hide start screen overlay */
+        document.getElementById('overlay').style.display = 'none';
+
+        /* call getRandomPhrase, set activePhrase with chosen phrase, call addPhraseToDisplay */
+        const randomPhrase = this.getRandomPhrase();
     }
 
     getRandomPhrase() {
         /* randomly retrieve phrase from phrases array and return it */
+        const randomNum = Math.floor(Math.random() * this.phrases.length);
+        return this.phrases[randomNum];
     }
 
-    handleInteraction() {
+    handleInteraction(btnPressed) {
+        console.log(btnPressed);
         /* checks to see if button clicked matches letter in phrase, then directs game based on correct or incorrect guess */
     }
 
