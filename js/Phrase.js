@@ -22,11 +22,19 @@ class Phrase {
         document.getElementById('phrase').innerHTML = htmlToDisplay;
     }
 
-    checkLetter() {
+    checkLetter(letter) {
         /* check to see if the letter selected by the player matches a letter in the phrase */
+        return this.phrase.includes(letter);
     }
 
-    showMatchedLetter() {
+    showMatchedLetter(letter) {
         /* reveal the letter on the board that matches the player's selection */
+        const phraseElements = document.getElementById('phrase').children[0].children;
+        for (let i = 0; i < phraseElements.length; i++) {
+            if(phraseElements[i].classList.contains(letter)) {
+                phraseElements[i].classList.remove('hide');
+                phraseElements[i].classList.add('show');
+            };
+        }
     }
 }
