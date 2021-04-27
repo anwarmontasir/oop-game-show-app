@@ -6,6 +6,7 @@ class Game {
     }
 
     startGame() {
+        console.log('start game!');
         /* hide start screen overlay, call getRandomPhrase, set activePhrase with chosen phrase, call addPhraseToDisplay */
     }
 
