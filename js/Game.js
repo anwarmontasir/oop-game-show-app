@@ -28,10 +28,9 @@ class Game {
         return this.phrases[randomNum];
     }
 
-    handleInteraction(btnPressed) {
+    handleInteraction(btnPressed, letter) {
         btnPressed.disabled = true;
         /* checks to see if button clicked matches letter in phrase, then directs game based on correct or incorrect guess */
-        const letter = btnPressed.innerHTML;
         if (this.activePhrase.checkLetter(letter)) {
             this.activePhrase.showMatchedLetter(letter);
             this.activePhrase.disableLetter(btnPressed, 'chosen');
