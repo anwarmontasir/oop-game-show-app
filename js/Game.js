@@ -42,13 +42,11 @@ class Game {
     }
 
     removeLife() {
-        /* remove a life from scoreboard */
+        const heart = document.getElementById('scoreboard').children[0].children[this.missed].children[0];
+        heart.setAttribute('src', 'images/lostHeart.png');
+        heart.setAttribute('alt', 'Grey Heart Icon');
+        
         this.missed++;
-        
-        const heart = document.getElementById('scoreboard').children[0].children[this.missed];
-        console.log(heart);
-        
-        
         if (this.missed === 5) {
             this.gameOver('you lose');
         }
@@ -58,7 +56,8 @@ class Game {
         /* has the player revealed all letters in active phrase */
     }
 
-    gameOver() {
+    gameOver(message) {
         /* display start screen overlay, win or loss message */
+        console.log(message)
     }
 }
