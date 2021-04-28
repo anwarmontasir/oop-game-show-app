@@ -2,11 +2,11 @@ class Game {
     constructor(missed = 0, phrases, activePhrase = null) {
         this.missed = missed;
         this.phrases = [
-            'Phrase One',
-            'Phrase Two',
-            'Phrase Three',
-            'Phrase Four',
-            'Phrase Five'
+            'Kermit The Frog',
+            'Miss Piggy',
+            'Fozzie Bear',
+            'Gonzo the Great',
+            'Doctor Teeth and the Electric Mayhem'
         ];
         this.activePhrase = activePhrase;
     }
@@ -16,10 +16,10 @@ class Game {
         document.getElementById('overlay').style.display = 'none';
 
         /* call getRandomPhrase, set activePhrase with chosen phrase */
-        const activePhrase = new Phrase(this.getRandomPhrase());
+        this.activePhrase = new Phrase(this.getRandomPhrase());
 
         /* call addPhraseToDisplay */
-        activePhrase.addPhraseToDisplay();
+        this.activePhrase.addPhraseToDisplay();
     }
 
     getRandomPhrase() {
@@ -28,8 +28,12 @@ class Game {
         return this.phrases[randomNum];
     }
 
-    handleInteraction(btnPressed) {
-        console.log(btnPressed);
+    handleInteraction(letter) {
+        if (this.activePhrase.checkLetter(letter)) {
+            this.activePhrase.showMatchedLetter(letter);
+        } else {
+            console.log(`no ${letter} ain't included`)
+        }
         /* checks to see if button clicked matches letter in phrase, then directs game based on correct or incorrect guess */
     }
 
