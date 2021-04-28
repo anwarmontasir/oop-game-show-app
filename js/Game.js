@@ -53,7 +53,7 @@ class Game {
         this.missed++;
         /* if missed score = 5, end game */
         if (this.missed === 5) {
-            this.gameOver('you lose');
+            this.gameOver('lose', 'Better luck next time :(');
         }
     }
  
@@ -70,12 +70,20 @@ class Game {
         }
         /* if no hidden letters found, end game */
         if (noHiddenLettersFound) {
-            this.gameOver('you win');
+            this.gameOver('win', `You win! ${this.activePhrase.winningPhrase} is correct :)`);
         }
     }
 
-    gameOver(message) {
-        /* display start screen overlay, win or loss message */
-        console.log(message)
+    gameOver(status, message) {
+        /* resetGame */
+        resetGame();
+        /* show start screen overlay */
+        document.getElementById('overlay').style.display = 'flex';
+        document.getElementById('overlay').classList.add(status);
+        document.getElementById('game-over-message').innerHTML = message;
+    }
+
+    resetGame() {
+        
     }
 }
