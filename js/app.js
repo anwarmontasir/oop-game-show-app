@@ -18,6 +18,6 @@ qwerty.addEventListener('click', e => {
     /* if an element with 'key' class is pressed */
     if (e.target.className === 'key') {
         /* call handleInteraction */
-        game.handleInteraction(e.target.innerHTML);
+        game.handleInteraction(e.target);
     }
 });

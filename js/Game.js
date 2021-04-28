@@ -28,19 +28,32 @@ class Game {
         return this.phrases[randomNum];
     }
 
-    handleInteraction(letter) {
+    handleInteraction(btnPressed) {
+        btnPressed.disabled = true;
+        /* checks to see if button clicked matches letter in phrase, then directs game based on correct or incorrect guess */
+        const letter = btnPressed.innerHTML;
         if (this.activePhrase.checkLetter(letter)) {
             this.activePhrase.showMatchedLetter(letter);
+            this.activePhrase.disableLetter(btnPressed, 'chosen');
         } else {
-            console.log(`no ${letter} ain't included`)
+            this.removeLife();
+            this.activePhrase.disableLetter(btnPressed, 'wrong');
         }
-        /* checks to see if button clicked matches letter in phrase, then directs game based on correct or incorrect guess */
     }
 
     removeLife() {
         /* remove a life from scoreboard */
+        this.missed++;
+        
+        const heart = document.getElementById('scoreboard').children[0].children[this.missed];
+        console.log(heart);
+        
+        
+        if (this.missed === 5) {
+            this.gameOver('you lose');
+        }
     }
-
+ 
     checkForWin() {
         /* has the player revealed all letters in active phrase */
     }

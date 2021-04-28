@@ -37,4 +37,10 @@ class Phrase {
             };
         }
     }
+
+    disableLetter(btnPressed, style) {
+        btnPressed.disabled = true;
+        console.log(style);
+        btnPressed.classList.add(style); 
+    }
 }
