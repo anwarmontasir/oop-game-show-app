@@ -38,6 +38,8 @@ class Game {
         } else {
             /* disable letter (add .wrong class) */
             this.activePhrase.disableLetter(btnPressed, 'wrong');
+            console.log('WHAT IS', this.missed);
+            console.log('WHAT PHRASE', this.activePhrase.phrase);
             /* remove life */
             this.removeLife();
         }
@@ -50,7 +52,8 @@ class Game {
         heart.setAttribute('src', 'images/lostHeart.png');
         heart.setAttribute('alt', 'Grey Heart Icon');
         /* increase missed score */
-        this.missed++;
+        this.missed += 1;
+        console.log('THIS IS',this.missed);
         /* if missed score = 5, end game */
         if (this.missed === 5) {
             this.gameOver('lose', 'Better luck next time :(');
@@ -75,15 +78,9 @@ class Game {
     }
 
     gameOver(status, message) {
-        /* resetGame */
-        resetGame();
         /* show start screen overlay */
         document.getElementById('overlay').style.display = 'flex';
         document.getElementById('overlay').classList.add(status);
         document.getElementById('game-over-message').innerHTML = message;
-    }
-
-    resetGame() {
-        
     }
 }
