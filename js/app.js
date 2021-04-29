@@ -1,10 +1,10 @@
-/* find start button */
-const startButton = document.getElementById('btn__reset');
 let game;
 let gameStarted = false;
+/* find start button */
+const startButton = document.getElementById('btn__reset');
 
 startButton.addEventListener('click', e => {
-    /* reset game */
+    /* reset game (if this isn't the first game) */
     if (gameStarted) {
         resetGame();
     }
@@ -12,7 +12,7 @@ startButton.addEventListener('click', e => {
     game = new Game();
     /* call startGame method */
     game.startGame();
-    
+    /* game has started */
     gameStarted = true;
     /* handle clicks and key presses */
     document.getElementById('qwerty').addEventListener('click', handleClick);
@@ -32,12 +32,12 @@ function handleKeyDown(e) {
     if (/^[a-zA-Z]+$/.test(e.key) && e.key.length === 1) {
         /* select dom elements with class 'key' */
         const keys = document.querySelectorAll('.key');
-        for (let i = 0; i < keys.length; i++) {
+        keys.forEach(key => {
             /* find key in DOM that matches keypress and make sure it isn't already disabled */
-            if (keys[i].innerHTML === e.key.toLowerCase() && !keys[i].disabled) {
-                game.handleInteraction(keys[i], keys[i].innerHTML);
+            if (key.innerHTML === e.key.toLowerCase() && !key.disabled) {
+                game.handleInteraction(key, key.innerHTML);
             }
-        }
+        });
     }
 }
 
@@ -51,12 +51,11 @@ function resetGame() {
         heart.setAttribute('alt', 'Blue Heart Icon');
     }
     const keys = document.querySelectorAll('.key');
-    for (let i = 0; i < keys.length; i++) {
-        keys[i].disabled = false;
-        keys[i].classList.remove('chosen');
-        keys[i].classList.remove('wrong');
-    }
-
+    keys.forEach(key => {
+        /* enable each key and remove added classes */
+        key.disabled = false;
+        key.classList.remove('chosen', 'wrong');
+    });
     /* remove listeners */
     document.removeEventListener('keydown', handleClick);
     document.getElementById('qwerty').removeEventListener('click', handleKeyDown);

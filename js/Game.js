@@ -30,9 +30,8 @@ class Game {
 
     getRandomPhrase() {
         /* randomly retrieve phrase from phrases array and return it */
-        const randomNum = Math.floor(Math.random() * this.phrases.length);
-        this.phraseNumber = randomNum;
-        return this.phrases[randomNum];
+        this.phraseNumber = Math.floor(Math.random() * this.phrases.length);
+        return this.phrases[this.phraseNumber];
     }
 
     handleInteraction(btnPressed, letter) {
@@ -86,8 +85,12 @@ class Game {
     gameOver(status, message, gif) {
         /* show start screen overlay */
         document.getElementById('overlay').style.display = 'flex';
+        /* style start screen appropriately */
+        document.getElementById('overlay').classList.remove('win', 'lose');
         document.getElementById('overlay').classList.add(status);
+        /* add message */
         document.getElementById('game-over-message').innerHTML = `<p>${message}</p>`;
+        /* add gif */
         document.getElementById('game-over-message').innerHTML += `<img src="${gif}" alt="Muppet gif">`;
     }
 }
