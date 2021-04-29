@@ -1,7 +1,6 @@
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
-        this.winningPhrase = phrase;
     }
 
     addPhraseToDisplay() {

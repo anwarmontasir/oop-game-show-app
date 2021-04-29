@@ -8,7 +8,15 @@ class Game {
             'Gonzo the Great',
             'Doctor Teeth and the Electric Mayhem'
         ];
+        this.gifs = [
+            'https://media.giphy.com/media/zfYpmAfrcVOAE/giphy.gif',
+            'https://media.giphy.com/media/7AXWA5riPxp60/giphy.gif',
+            'https://media.giphy.com/media/CdwvDXD6bqCcw/giphy.gif',
+            'https://media.giphy.com/media/veAvedpr1V0qc/giphy.gif',
+            'https://media.giphy.com/media/TisPw8htImw3m/giphy.gif'
+        ]
         this.activePhrase = null;
+        this.phraseNumber = null;
     }
 
     startGame() {
@@ -23,6 +31,7 @@ class Game {
     getRandomPhrase() {
         /* randomly retrieve phrase from phrases array and return it */
         const randomNum = Math.floor(Math.random() * this.phrases.length);
+        this.phraseNumber = randomNum;
         return this.phrases[randomNum];
     }
 
@@ -38,8 +47,6 @@ class Game {
         } else {
             /* disable letter (add .wrong class) */
             this.activePhrase.disableLetter(btnPressed, 'wrong');
-            console.log('WHAT IS', this.missed);
-            console.log('WHAT PHRASE', this.activePhrase.phrase);
             /* remove life */
             this.removeLife();
         }
@@ -53,10 +60,9 @@ class Game {
         heart.setAttribute('alt', 'Grey Heart Icon');
         /* increase missed score */
         this.missed += 1;
-        console.log('THIS IS',this.missed);
         /* if missed score = 5, end game */
         if (this.missed === 5) {
-            this.gameOver('lose', 'Better luck next time :(');
+            this.gameOver('lose', 'Better luck next time :(', 'https://media.giphy.com/media/XJnTL3z83KssHtPYai/giphy.gif');
         }
     }
  
@@ -73,14 +79,15 @@ class Game {
         }
         /* if no hidden letters found, end game */
         if (noHiddenLettersFound) {
-            this.gameOver('win', `You win! ${this.activePhrase.winningPhrase} is correct :)`);
+            this.gameOver('win', `You win! ${this.phrases[this.phraseNumber]} is correct :)`, this.gifs[this.phraseNumber]);
         }
     }
 
-    gameOver(status, message) {
+    gameOver(status, message, gif) {
         /* show start screen overlay */
         document.getElementById('overlay').style.display = 'flex';
         document.getElementById('overlay').classList.add(status);
-        document.getElementById('game-over-message').innerHTML = message;
+        document.getElementById('game-over-message').innerHTML = `<p>${message}</p>`;
+        document.getElementById('game-over-message').innerHTML += `<img src="${gif}" alt="Muppet gif">`;
     }
 }
